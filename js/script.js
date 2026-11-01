@@ -88,7 +88,7 @@ $("#reasonGrid").innerHTML=all.map((t,i)=>`<button class="card" aria-label="Reas
 $("#reasonGrid").onclick=e=>{const c=e.target.closest(".card");if(c)c.classList.toggle("flip")};
 $("#finalLetter").innerHTML=finalLetter.map(p=>`<p>${esc(p)}</p>`).join("")+`<p class="sig">Forever yours</p>`;
 $("#confettiBtn").onclick=()=>{for(let i=0;i<40;i++){const p=document.createElement("div");p.className="petal";p.textContent="\u2740";
- p.style.cssText=`left:${Math.random()*100}vw;font-size:${14+Math.random()*18}px;color:${["#c98a91","#f4d6d6","#b8955a","#6e1f33"][i%4]};animation-duration:${3+Math.random()*3}s`;document.body.appendChild(p);setTimeout(()=>p.remove(),6500)}};
+ p.style.cssText=`left:${Math.random()*100}vw;font-size:${14+Math.random()*18}px;color:${["#b9737d","#e8c4c4","#a98445","#7a3b4c"][i%4]};animation-duration:${3+Math.random()*3}s`;document.body.appendChild(p);setTimeout(()=>p.remove(),6500)}};
 
 const SONGS=[
  {img:"images/decorations/song-1.jpg",alt:"Best Part by Daniel Caesar feat. H.E.R. music player",cover:"images/decorations/cover.jpg",title:"Best Part (feat. H.E.R.)",artist:"Daniel Caesar",lines:["If life is a movie, then","you're the best part"],bg:"#85919d",ink:"#101a24"},
@@ -174,10 +174,10 @@ const tilt=(el,e)=>{if(still)return;const pl=el.firstChild,r=el.getBoundingClien
  const g=pl.lastChild;g.style.setProperty("--gx",px*100+"%");g.style.setProperty("--gy",py*100+"%")};
 const notes=["♪","♫","♥"];
 const fx=(el,ch,x,y,o={})=>{const e=document.createElement("span");e.className="fx";e.textContent=ch;
- e.style.cssText=`left:${x}px;top:${y}px;font-size:${o.size||16}px;color:${o.color||"#e37b96"};--x:${o.dx||0}px;--y:${o.dy||-110}px;--r:${o.r||20}deg;--d:${o.d||2.2}s`;
+ e.style.cssText=`left:${x}px;top:${y}px;font-size:${o.size||16}px;color:${o.color||"#b9737d"};--x:${o.dx||0}px;--y:${o.dy||-110}px;--r:${o.r||20}deg;--d:${o.d||2.2}s`;
  el.appendChild(e);setTimeout(()=>e.remove(),(o.d||2.2)*1000+100)};
 function open(si,x,y){const el=slides[si];
- if(!still)for(let i=0;i<14;i++)fx(el,i%3?"♥":"♫",x,y,{size:14+Math.random()*14,dx:(Math.random()-.5)*190,dy:-60-Math.random()*130,r:(Math.random()-.5)*80,d:1.2+Math.random()*.6,color:["#e37b96","#c98a91","#6e1f33","#b8955a"][i%4]});
+ if(!still)for(let i=0;i<14;i++)fx(el,i%3?"♥":"♫",x,y,{size:14+Math.random()*14,dx:(Math.random()-.5)*190,dy:-60-Math.random()*130,r:(Math.random()-.5)*80,d:1.2+Math.random()*.6,color:["#b9737d","#d9a1a6","#7a3b4c","#a98445"][i%4]});
  setTimeout(()=>openLyrics(SONGS[si]),still?0:420)}
 slides.forEach((el,si)=>{let sx=0,st=0,dx=0,id=null,moved=false;
  el.addEventListener("pointerdown",e=>{if(busy||order[0]!==si||(e.pointerType==="mouse"&&e.button))return;
