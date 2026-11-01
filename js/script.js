@@ -3,8 +3,8 @@ const $=s=>document.querySelector(s);
 const collections=[
  {title:"The Girl I Adore",items:[{src:"images/memories/adore-1.jpg",cap:"",date:""},{src:"images/memories/adore-2.jpg",cap:"",date:""},{src:"images/memories/adore-3.jpg",cap:"",date:""},{src:"images/memories/adore-4.jpg",cap:"",date:""},{src:"images/memories/adore-5.jpg",cap:"",date:""},{src:"images/memories/adore-6.jpg",cap:"",date:""},{src:"images/memories/adore-7.jpg",cap:"",date:""},{src:"images/memories/adore-8.jpg",cap:"",date:""}]},
  {title:"Just You and Me",items:[{src:"images/memories/us-1.jpg",cap:"",date:""},{src:"images/memories/us-2.jpg",cap:"",date:""},{src:"images/memories/us-3.jpg",cap:"",date:""},{src:"images/memories/us-4.jpg",cap:"",date:""},{src:"images/memories/us-5.jpg",cap:"",date:""},{src:"images/memories/us-6.jpg",cap:"",date:""},{src:"images/memories/us-7.jpg",cap:"",date:""},{src:"images/memories/us-8.jpg",cap:"",date:""},{src:"images/memories/us-9.jpg",cap:"",date:""}]},
- {title:"Little Things, Big Memories",items:[{src:"images/memories/moments-1.jpg",cap:"Birthday at Fairytale Land",date:""},{src:"images/memories/moments-2.jpg",cap:"",date:""},{src:"images/memories/moments-3.jpg",cap:"School day flowers",date:""},{src:"images/memories/moments-4.jpg",cap:"",date:""},{src:"images/memories/moments-5.jpg",cap:"",date:""},{src:"images/memories/moments-6.jpg",cap:"",date:""},{src:"images/memories/moments-7.jpg",cap:"",date:""},{src:"images/memories/moments-8.jpg",cap:"",date:""}]},
- {title:"Before I Knew You",items:[{src:"images/memories/before-1.jpg",cap:"",date:""},{src:"images/memories/before-2.jpg",cap:"",date:""},{src:"images/memories/before-3.jpg",cap:"",date:""},{src:"images/memories/before-4.jpg",cap:"",date:""},{src:"images/memories/before-5.jpg",cap:"",date:""}]}
+ {title:"Little Things, Big Memories",items:[{src:"images/memories/moments-1.jpg",cap:"",date:""},{src:"images/memories/moments-2.jpg",cap:"",date:""},{src:"images/memories/moments-3.jpg",cap:"",date:""},{src:"images/memories/moments-4.jpg",cap:"",date:""},{src:"images/memories/moments-5.jpg",cap:"",date:""},{src:"images/memories/moments-6.jpg",cap:"",date:""},{src:"images/memories/moments-7.jpg",cap:"",date:""},{src:"images/memories/moments-8.jpg",cap:"",date:""}]},
+ {title:"Before I Knew You",items:[{src:"images/memories/before-1.jpg",cap:"",date:""},{src:"images/memories/before-2.jpg",cap:"",date:""},{src:"images/memories/before-3.jpg",cap:"",date:""},{src:"images/memories/before-4.jpg",cap:"",date:""},{src:"images/memories/before-5.jpg",cap:"",date:""},{src:"images/memories/before-6.jpg",cap:"",date:""},{src:"images/memories/before-7.jpg",cap:"",date:""}]}
 ];
 const letters=[
  {t:"When You Miss Me",b:["Yadi, if you're reading this, you're missing me, and I'm missing you right back.","Close your eyes and remember how it feels when we're together: the easy laughter, the quiet moments. That doesn't disappear when we're apart. It waits for us.","Whatever distance there is today is only temporary. My heart is already with you."]},
@@ -77,9 +77,9 @@ modal.onclick=e=>{if(e.target===modal||e.target.classList.contains("close"))moda
 addEventListener("keydown",e=>{if(e.key==="Escape")modal.hidden=true});
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const rots=[-3,2,-1.5,3];
-$("#collections").innerHTML=collections.map((c,ci)=>`<div class="col"><h2>${esc(c.title)}</h2><div class="polas">${c.items.map((it,i)=>`<button class="pola" style="--r:${rots[i%4]}deg" data-c="${ci}" data-i="${i}"><div class="ph">&#10048;<img src="${it.src}" alt="${esc(it.cap)}" onerror="this.remove()"></div><span class="cap">${esc(it.cap)}</span><span class="dt">${esc(it.date)}</span></button>`).join("")}</div></div>`).join("");
+$("#collections").innerHTML=collections.map((c,ci)=>`<div class="col"><h2>${esc(c.title)}</h2><div class="polas">${c.items.map((it,i)=>`<button class="pola" style="--r:${rots[i%4]}deg" data-c="${ci}" data-i="${i}"><div class="ph">&#10048;<img src="${it.src}" alt="Our memory" onload="if(this.naturalHeight>this.naturalWidth*1.1)this.style.objectPosition='50% 20%'" onerror="this.remove()"></div></button>`).join("")}</div></div>`).join("");
 $("#collections").onclick=e=>{const b=e.target.closest(".pola");if(!b)return;const it=collections[b.dataset.c].items[b.dataset.i];
- show(`<div class="view"><div class="ph">&#10048;<img src="${it.src}" alt="${esc(it.cap)}" onerror="this.remove()"></div><p class="script">${esc(it.cap)}</p><small>${esc(it.date)}</small></div>`)};
+ show(`<div class="view"><div class="ph">&#10048;<img src="${it.src}" alt="Our memory" onerror="this.remove()"></div></div>`)};
 $("#envGrid").innerHTML=letters.map((l,i)=>`<button class="mini" data-i="${i}"><span>${esc(l.t)}</span></button>`).join("");
 $("#envGrid").onclick=e=>{const b=e.target.closest(".mini");if(!b)return;const l=letters[b.dataset.i];
  show(`<div class="unfold"><h1>${esc(l.t)}</h1>${l.b.map(p=>`<p>${esc(p)}</p>`).join("")}<p class="sig">Always yours</p></div>`)};
@@ -203,4 +203,21 @@ const ambient=()=>{if(document.hidden||still||busy)return;const el=slides[order[
 if("IntersectionObserver"in window)new IntersectionObserver(([en])=>{clearInterval(amb);if(en.isIntersecting){amb=setInterval(ambient,1100);
  if(!nudged&&!still&&en.intersectionRatio>.6){nudged=true;setTimeout(()=>{if(busy||deck.classList.contains("dragging"))return;const el=slides[order[0]];
   setv(el,{x:"34px",r:"6deg"});setTimeout(()=>{if(!deck.classList.contains("dragging"))layout()},520)},700)}}},{threshold:[0,.6]}).observe(deck);
+})();
+
+/* ---------- SCROLL REVEAL ---------- */
+(()=>{
+ if(matchMedia("(prefers-reduced-motion:reduce)").matches||!("IntersectionObserver"in window))return;
+ const sel=".page h1,.page .sub,.sheet,.sheet > p,.sheet > .songreminds,.timeline li,.col h2,.pola,.mini,.card,.letter-body p,#confettiBtn";
+ const els=[...document.querySelectorAll(sel)];
+ document.documentElement.classList.add("rv");
+ const groups=new Map();
+ els.forEach(el=>{el.classList.add("rv");const k=el.parentElement;const n=groups.get(k)||0;groups.set(k,n+1);el.style.setProperty("--d",(n%6)*.09+"s")});
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -10% 0px",threshold:0});
+ const home=els.filter(e=>e.closest("#home")),rest=els.filter(e=>!e.closest("#home"));
+ rest.forEach(e=>io.observe(e));
+ /* the home page waits until the envelope intro has gone, so its animation isn't hidden behind it */
+ const startHome=()=>home.forEach(e=>io.observe(e));
+ const ob=$("#openBtn");
+ if($("#intro")&&ob){ob.addEventListener("click",()=>setTimeout(startHome,2200),{once:true})}else startHome();
 })();

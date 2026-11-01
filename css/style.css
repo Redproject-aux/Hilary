@@ -34,8 +34,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--burg);outline-offse
 .timeline li{position:relative;margin-bottom:2rem}.timeline li::before{content:"\2740";position:absolute;left:calc(-1.6rem - 10px);top:0;color:var(--rose);background:var(--paper);font-size:1.1rem}
 .timeline .soft{padding:1rem 1.2rem;border-left:3px solid var(--gold);background:#f4d6d655}
 .col{margin:3rem 0}.col h2{font-family:var(--serif);color:var(--burg);font-size:2rem;margin:0 0 1rem;text-align:center}
-.polas{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.6rem;padding:1rem}
-.pola{background:#fff;padding:.7rem .7rem 1rem;box-shadow:0 6px 16px #3a2a2c33;border:0;cursor:pointer;transform:rotate(var(--r));transition:.25s;font:inherit;text-align:center}
+.polas{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:1.8rem;padding:1rem}
+.pola{flex:0 0 auto;width:min(100%,250px);background:#fff;padding:.7rem .7rem 1rem;box-shadow:0 6px 16px #3a2a2c33;border:0;cursor:pointer;transform:rotate(var(--r));transition:.25s;font:inherit;text-align:center}
 .pola:hover{transform:rotate(0) scale(1.05);z-index:2}
 .ph{position:relative;aspect-ratio:1;background:linear-gradient(135deg,var(--blush),#efe0c4);display:grid;place-items:center;color:var(--rose);font-size:2rem;overflow:hidden}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -149,3 +149,14 @@ body{overflow-x:clip}
 body.is-locked{overflow:hidden}
 @media (max-width:380px){.cd-row{gap:.4rem}.cd-row div{min-width:56px}.cd-row b{font-size:1.7rem}}
 @media (prefers-reduced-motion:reduce){#intro.locked .seal{animation:none}}
+
+/* scroll reveal: hidden until the element's page section scrolls into view */
+html.rv .rv:not(.in){opacity:0;translate:0 38px}
+html.rv .rv.in{animation:rvIn .85s cubic-bezier(.2,.7,.2,1) var(--d,0s) both}
+html.rv .pola.rv:not(.in),html.rv .card.rv:not(.in){translate:0 52px;scale:.94}
+html.rv .pola.rv.in,html.rv .card.rv.in{animation-name:rvPop}
+html.rv .timeline li.rv:not(.in){translate:-30px 0}
+html.rv .timeline li.rv.in{animation-name:rvSide}
+@keyframes rvIn{from{opacity:0;translate:0 38px}to{opacity:1;translate:0 0}}
+@keyframes rvPop{from{opacity:0;translate:0 52px;scale:.94}to{opacity:1;translate:0 0;scale:1}}
+@keyframes rvSide{from{opacity:0;translate:-30px 0}to{opacity:1;translate:0 0}}
